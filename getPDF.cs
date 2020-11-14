@@ -39,8 +39,8 @@ namespace MOCD.CS.Report.Generate
                 byte[] result = null;
 
                 ReportExecutionService rs = new ReportExecutionService();
-                rs.Credentials = new NetworkCredential("CRM.SQLSAS", "#)CD$QL@$AS@0192837465", "mocd");
-                rs.Url = "http://mocd-crm-sql/ReportServer/ReportExecution2005.asmx";
+                rs.Credentials = new NetworkCredential("<Username>", "<Password>", "<Domain>");
+                rs.Url = "<Org_URL>/ReportExecution2005.asmx";
                 tracingService.Trace(context.OrganizationName);
                 string reportPath = "/"+context.OrganizationName+"_MSCRM/"+_rpName;
                 string format = "PDF";
@@ -64,7 +64,7 @@ namespace MOCD.CS.Report.Generate
                 String SessionId = rs.ExecutionHeaderValue.ExecutionID;
 
                 result = rs.Render(format, devInfo, out extension, out encoding, out mimeType, out warnings, out streamIDs);
-                Response.Rootobject response = this.stampletter(Convert.ToBase64String(result), Convert.ToInt32(result.Length.ToString()), _appNum, "E37E712FB2C4B09453C65035B672D452B27F68CCE0236EECDF6A0834DEED70AB", "https://blockchain.mocd.gov.ae/Catapult/api/API");
+                Response.Rootobject response = this.stampletter(Convert.ToBase64String(result), Convert.ToInt32(result.Length.ToString()), _appNum, "<Token>", "<BlockChain_URL>");
                 string StamppedFile = response.UploadZipHash;
                 //Create email activity
                 Entity attachment = new Entity("activitymimeattachment");
