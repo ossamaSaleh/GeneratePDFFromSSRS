@@ -64,7 +64,7 @@ namespace MOCD.CS.Report.Generate
                 String SessionId = rs.ExecutionHeaderValue.ExecutionID;
 
                 result = rs.Render(format, devInfo, out extension, out encoding, out mimeType, out warnings, out streamIDs);
-                Response.Rootobject response = this.stampletter(Convert.ToBase64String(result), Convert.ToInt32(result.Length.ToString()), _appNum, "<Token>", "<BlockChain_URL>");
+                Response.Rootobject response = this.GetStamp(Convert.ToBase64String(result), Convert.ToInt32(result.Length.ToString()), _appNum, "<Token>", "<BlockChain_URL>");
                 string StamppedFile = response.UploadZipHash;
                 //Create email activity
                 Entity attachment = new Entity("activitymimeattachment");
@@ -105,7 +105,7 @@ namespace MOCD.CS.Report.Generate
             }
         }
 
-        private Response.Rootobject stampletter(string filebody,int filesize, string filetag,  string token,  string APoURL)
+        private Response.Rootobject GetStamp(string filebody,int filesize, string filetag,  string token,  string APoURL)
         {
             string str = JsonConvert.SerializeObject(new Request()
             {
